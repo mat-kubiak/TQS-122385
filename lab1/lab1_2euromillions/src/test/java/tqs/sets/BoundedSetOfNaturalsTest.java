@@ -58,7 +58,6 @@ class BoundedSetOfNaturalsTest {
         assertThrows(IllegalArgumentException.class, () -> setA.add(-100));
     }
 
-    @Disabled
     @Test
     public void testIntersection() {
         assertTrue(setB.intersects(setC), "intersection: intersection isn't detected");
@@ -80,7 +79,6 @@ class BoundedSetOfNaturalsTest {
         assertFalse(setE.equals(5));
     }
 
-//    @Disabled("TODO revise to test the construction from invalid arrays")
     @Test
     public void testAddFromBadArray() {
         int[] elems = new int[]{10, -20, -30};
