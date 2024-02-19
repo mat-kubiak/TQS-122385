@@ -58,6 +58,28 @@ class BoundedSetOfNaturalsTest {
         assertThrows(IllegalArgumentException.class, () -> setA.add(-100));
     }
 
+    @Disabled
+    @Test
+    public void testIntersection() {
+        assertTrue(setB.intersects(setC), "intersection: intersection isn't detected");
+        setA.add(70);
+        assertFalse(setA.intersects(setC), "intersection: false intersection is detected");
+    }
+
+    @Test
+    public void testHash() {
+        assertNotEquals(setB.hashCode(), setC.hashCode(), "hash: two different sets have the same hash!");
+        assertNotEquals(setB.hashCode(), setC.hashCode(), "hash: the same set has a different hash!");
+    }
+
+    @Test
+    public void testEquals() {
+        BoundedSetOfNaturals setE = setA;
+        assertTrue(setE.equals(setA));
+        assertFalse(setE.equals(null));
+        assertFalse(setE.equals(5));
+    }
+
 //    @Disabled("TODO revise to test the construction from invalid arrays")
     @Test
     public void testAddFromBadArray() {
