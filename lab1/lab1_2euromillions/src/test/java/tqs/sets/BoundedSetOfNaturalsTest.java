@@ -16,6 +16,7 @@ class BoundedSetOfNaturalsTest {
     private BoundedSetOfNaturals setA;
     private BoundedSetOfNaturals setB;
     private BoundedSetOfNaturals setC;
+    private BoundedSetOfNaturals setD;
 
 
     @BeforeEach
@@ -23,6 +24,7 @@ class BoundedSetOfNaturalsTest {
         setA = new BoundedSetOfNaturals(1);
         setB = BoundedSetOfNaturals.fromArray(new int[]{10, 20, 30, 40, 50, 60});
         setC = BoundedSetOfNaturals.fromArray(new int[]{50, 60});
+        setD = new BoundedSetOfNaturals(2);
     }
 
     @AfterEach
@@ -30,20 +32,33 @@ class BoundedSetOfNaturalsTest {
         setA = setB = setC = null;
     }
 
-    @Disabled("TODO revise test logic")
     @Test
     public void testAddElement() {
-
         setA.add(99);
         assertTrue(setA.contains(99), "add: added element not found in set.");
         assertEquals(1, setA.size());
-
-        setB.add(11);
-        assertTrue(setB.contains(11), "add: added element not found in set.");
-        assertEquals(7, setB.size(), "add: elements count not as expected.");
     }
 
-    @Disabled("TODO revise to test the construction from invalid arrays")
+    @Test
+    public void testAddToFull() {
+        assertThrows(IllegalArgumentException.class, () -> setB.add(11));
+        assertFalse(setB.contains(11), "add: redundant element was added to a set.");
+        assertEquals(6, setB.size(), "add: elements count not as expected.");
+    }
+
+    @Test
+    public void testAddDuplicate() {
+        setD.add(10);
+        assertThrows(IllegalArgumentException.class, () -> setD.add(10));
+    }
+
+    @Test
+    public void testAddNotANumber() {
+        assertThrows(IllegalArgumentException.class, () -> setA.add(0));
+        assertThrows(IllegalArgumentException.class, () -> setA.add(-100));
+    }
+
+//    @Disabled("TODO revise to test the construction from invalid arrays")
     @Test
     public void testAddFromBadArray() {
         int[] elems = new int[]{10, -20, -30};
@@ -51,6 +66,4 @@ class BoundedSetOfNaturalsTest {
         // must fail with exception
         assertThrows(IllegalArgumentException.class, () -> setA.add(elems));
     }
-
-
 }
