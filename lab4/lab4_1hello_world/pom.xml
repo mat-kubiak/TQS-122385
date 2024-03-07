@@ -34,6 +34,8 @@
         <appium.version>9.1.0</appium.version>
         <rest-assured.version>5.4.0</rest-assured.version>
 
+        <selenium-jupiter.version>5.0.1</selenium-jupiter.version>
+
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
 
         <java.version>17</java.version>
@@ -98,6 +100,13 @@
                     <artifactId>*</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>selenium-jupiter</artifactId>
+            <version>${selenium-jupiter.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -285,6 +294,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
             </plugin>
+
         </plugins>
     </build>
 
