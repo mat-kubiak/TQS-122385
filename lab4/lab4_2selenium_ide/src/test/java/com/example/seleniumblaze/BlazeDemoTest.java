@@ -14,7 +14,7 @@ import org.openqa.selenium.WebElement;
 public class BlazeDemoTest {
 
   @Test
-  public void sumtest(WebDriver driver) {
+  public void testRegisterFlight(WebDriver driver) {
     driver.get("https://blazedemo.com/");
     driver.findElement(By.name("fromPort")).click();
     {

@@ -157,12 +157,11 @@ class ConfirmPage {
   }
 }
 
-
 @ExtendWith(SeleniumJupiter.class)
 public class BlazeDemoTest {
 
   @Test
-  public void testLogging(WebDriver driver) {
+  public void testRegisterFlight(WebDriver driver) {
 
     HomePage homePage = new HomePage(driver);
     homePage.setAirports("Mexico City", "Berlin");
