@@ -5,7 +5,7 @@ import java.util.Stack;
 public class Calculator {
     Stack<Double> values = new Stack<>();
 
-    public void push(String operator) throws IllegalArgumentException {
+    public void push(String operator) throws RuntimeException {
         if (values.size() < 2) {
             throw new RuntimeException("There are too few values (" + values.size() + ") to apply an operator (" + operator + ")");
         }
@@ -13,23 +13,13 @@ public class Calculator {
         double a = values.pop();
         double b = values.pop();
 
-        double toPush = 0.0;
-        switch (operator) {
-            case "+":
-                toPush = b + a;
-                break;
-            case "-":
-                toPush = b - a;
-                break;
-            case "*":
-                toPush = b * a;
-                break;
-            case "/":
-                toPush = b / a;
-                break;
-            default:
-                throw new IllegalArgumentException("'" + operator + "' is not a valid operator");
-        }
+        double toPush = switch (operator) {
+            case "+" -> b + a;
+            case "-" -> b - a;
+            case "*" -> b * a;
+            case "/" -> b / a;
+            default -> throw new IllegalArgumentException("'" + operator + "' is not a valid operator");
+        };
         values.push(toPush);
     }
 
