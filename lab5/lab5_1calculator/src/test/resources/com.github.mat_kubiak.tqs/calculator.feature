@@ -14,3 +14,6 @@ Feature: Arithmetic
   Scenario: Division
     When I divide 6 by 2
     Then I get 3
+  Scenario: Invalid Operator
+    When I put invalid operator after 2 and 6
+    Then I get an error
