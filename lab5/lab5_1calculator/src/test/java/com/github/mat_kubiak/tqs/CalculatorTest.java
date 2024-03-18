@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CalculatorTest {
 
     private Calculator calc;
+    private Exception caughtExcept;
 
     @Given("I have a calculator")
     public void setup() {
@@ -47,7 +48,11 @@ public class CalculatorTest {
     public void invalidOp(double arg1, double arg2) {
         calc.push(arg1);
         calc.push(arg2);
-        calc.push("&");
+        try {
+            calc.push("&");
+        } catch (Exception e) {
+            caughtExcept = e;
+        }
     }
 
     @Then("I get {double}")
@@ -57,9 +62,6 @@ public class CalculatorTest {
 
     @Then("I get an error")
     public void checkError() {
-        try {
-            calc.pullValue();
-            fail("Exception has not been thrown for the invalid operator!");
-        } catch (Exception e) {}
+        assertNotNull(caughtExcept);
     }
 }

@@ -1,51 +1,46 @@
 package com.github.mat_kubiak.tqs;
 
+import java.util.Stack;
+
 public class Calculator {
-    private Double val1 = null;
-    private Double val2 = null;
-    private String operator = null;
+    Stack<Double> values = new Stack<>();
 
     public void push(String operator) throws IllegalArgumentException {
-        this.operator = operator;
-    }
-
-    public void push(double val) throws IllegalArgumentException {
-        if (val1 == null) {
-            val1 = val;
-        } else if (val2 == null) {
-            val2 = val;
-        } else {
-            throw new IllegalArgumentException("only two arguments are allowed to the calculator!");
-        }
-    }
-
-    public double pullValue() throws RuntimeException {
-        if (val1 == null || val2 == null) {
-            throw new RuntimeException("two arguments are required!");
+        if (values.size() < 2) {
+            throw new RuntimeException("There are too few values (" + values.size() + ") to apply an operator (" + operator + ")");
         }
 
-        double toReturn = 0.0;
+        double a = values.pop();
+        double b = values.pop();
+
+        double toPush = 0.0;
         switch (operator) {
             case "+":
-                toReturn = val1 + val2;
+                toPush = b + a;
                 break;
             case "-":
-                toReturn = val1 - val2;
+                toPush = b - a;
                 break;
             case "*":
-                toReturn = val1 * val2;
+                toPush = b * a;
                 break;
             case "/":
-                toReturn = val1 / val2;
+                toPush = b / a;
                 break;
             default:
                 throw new IllegalArgumentException("'" + operator + "' is not a valid operator");
         }
+        values.push(toPush);
+    }
 
-        val1 = null;
-        val2 = null;
-        operator = null;
+    public void push(double val) {
+        values.push(val);
+    }
 
-        return toReturn;
+    public double pullValue() throws RuntimeException {
+        if (values.size() != 1) {
+            throw new RuntimeException("There number of values is not 1 (" + values.size() + ")!");
+        }
+        return values.pop();
     }
 }
