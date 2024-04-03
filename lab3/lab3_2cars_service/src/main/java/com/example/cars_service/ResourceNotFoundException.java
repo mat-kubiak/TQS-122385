@@ -1,4 +1,4 @@
-package com.example.cars_service.test;
+package com.example.cars_service;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

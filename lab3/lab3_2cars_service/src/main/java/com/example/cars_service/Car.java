@@ -1,4 +1,4 @@
-package com.example.cars_service.test;
+package com.example.cars_service;
 
 import jakarta.persistence.*;
 import java.util.Objects;
@@ -15,8 +15,8 @@ import jakarta.validation.constraints.Size;
 public class Car {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long carId;
 
     @NotBlank
     @Size(max = 100)
@@ -35,8 +35,8 @@ public class Car {
         this.model = model;
     }
 
-    public Car(Long id, String maker, String model) {
-        this.id = id;
+    public Car(Long carId, String maker, String model) {
+        this.carId = carId;
         this.brand = maker;
         this.model = model;
     }
@@ -46,20 +46,20 @@ public class Car {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return Objects.equals(id, car.id) && Objects.equals(brand, car.brand) && Objects.equals(model, car.model);
+        return Objects.equals(carId, car.carId) && Objects.equals(brand, car.brand) && Objects.equals(model, car.model);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, brand, model);
+        return Objects.hash(carId, brand, model);
     }
 
     public Long getId() {
-        return id;
+        return carId;
     }
 
     public void setId(Long carId) {
-        this.id = carId;
+        this.carId = carId;
     }
 
     public String getBrand() {

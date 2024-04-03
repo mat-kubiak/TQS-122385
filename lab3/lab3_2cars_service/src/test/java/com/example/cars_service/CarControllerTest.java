@@ -1,4 +1,4 @@
-package com.example.cars_service.test;
+package com.example.cars_service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
